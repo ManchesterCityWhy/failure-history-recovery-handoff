@@ -12,33 +12,35 @@
 
 ## 新机器如何接收
 
-仓库保持私有。先在新机器安装Git与官方GitHub CLI，再用有仓库访问权的账号登录：
+本仓库已按研究者要求公开。新机器无需登录GitHub，也不需要GitHub CLI、访问token或SSH key。
+
+如果只需要交接书，直接下载一个Markdown文件：
 
 ```bash
-gh auth login --hostname github.com --git-protocol https --web
+curl -fL --retry 3 \
+  https://raw.githubusercontent.com/ManchesterCityWhy/failure-history-recovery-handoff/main/docs/PROJECT_HANDOFF_8x5090_2026-11-07.md \
+  -o PROJECT_HANDOFF_8x5090_2026-11-07.md
 ```
 
-然后克隆本仓库：
+也可以匿名克隆整个文档仓库，保留README与校验文件：
 
 ```bash
-gh auth setup-git
-gh repo clone ManchesterCityWhy/failure-history-recovery-handoff
+git clone --depth 1 https://github.com/ManchesterCityWhy/failure-history-recovery-handoff.git
 cd failure-history-recovery-handoff
+sha256sum -c CHECKSUMS.sha256
 ```
 
 仓库地址：<https://github.com/ManchesterCityWhy/failure-history-recovery-handoff>。
 
-账号认证信息不要写进URL、脚本或交接文档，也不要把本机SSH私钥复制到新机器。首次只克隆文档；模型和依赖按交接书在新机获取。
-
-下载后在仓库根目录校验交接书：
+单独下载交接书时，可以检查其SHA256：
 
 ```bash
-sha256sum -c CHECKSUMS.sha256
+sha256sum PROJECT_HANDOFF_8x5090_2026-11-07.md
 ```
 
-macOS可使用 `shasum -a 256 -c CHECKSUMS.sha256`。
+预期值为 `1904c9e1aadc79b6ebee575ab22b5045e89ba5a480a47e03fa73b511fb7d578e`。macOS可将 `sha256sum` 换成 `shasum -a 256`。
 
-如果不希望在共享开发机保存GitHub登录，可在已登录的个人电脑上下载仓库，再通过自己的安全文件传输通道复制文档到服务器。
+首次只获取文档；模型和依赖按交接书在新机获取。不要把个人电脑的SSH私钥或登录凭据复制到共享服务器。
 
 ## 给coding agent的最短启动指令
 
@@ -47,6 +49,6 @@ macOS可使用 `shasum -a 256 -c CHECKSUMS.sha256`。
 ## 仓库边界
 
 - 仅文档交接，不表示全部旧资产已经迁移。
-- 不公开未发表研究，不包含访问token、密码、私钥或外部账号授权。
+- 本仓库按研究者要求公开，包含拟议研究计划与历史路径；后续提交不要加入凭据、未授权资料、数据或权重。
 - 旧路径只作历史证据定位，不能作为新机运行依赖。
 - 新实验代码、权重和数据请在新机的独立研究目录中开发，依主文档另行版本管理。
