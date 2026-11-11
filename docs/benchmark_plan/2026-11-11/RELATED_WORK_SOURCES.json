@@ -1,0 +1,17 @@
+{
+  "checked_as_of": "2026-11-11",
+  "verification_scope": "Primary paper HTML, author repository or author project page read in this research turn; not a new reproduction run",
+  "sources": [
+    {"name": "EmbodiedMemory-Bench", "paper": "https://arxiv.org/html/2609.28236", "focus_read": ["4.2 Interaction Failure", "D.1 Causal Dependence on Interaction History"]},
+    {"name": "CMA", "paper": "https://arxiv.org/html/2609.27247", "focus_read": ["III audit protocol", "native-rollout interventions"]},
+    {"name": "RoboCasa-Mem", "paper": "https://arxiv.org/html/2611.06475", "focus_read": ["3 benchmark", "A.2 DrawerSearch"]},
+    {"name": "RoboMME", "paper": "https://arxiv.org/html/2603.04639", "code": "https://github.com/RoboMME/robomme_benchmark"},
+    {"name": "RoboMME-Plus author analysis", "page": "https://robomme.github.io/blog/"},
+    {"name": "LIBERO-Recovery", "code": "https://github.com/liulin815/LIBERO-Recovery"},
+    {"name": "RecoverBench", "code": "https://github.com/ErrorRecoveryBenchmark/ErrorRecoveryBenchmark", "data": "https://huggingface.co/datasets/ErrorRecovery/ErrorRecoveryBenchmark"},
+    {"name": "RACER-DataGen", "code": "https://github.com/rich-language-failure-recovery/RACER-DataGen"},
+    {"name": "Recova", "paper": "https://arxiv.org/html/2610.01178"},
+    {"name": "RoboDojo", "code": "https://github.com/robodojo-benchmark/RoboDojo"},
+    {"name": "Qwen3-VL-8B-Instruct official model card", "model": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct"}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "sampling_plan_only": true,
+  "candidate_condition_instances": 576,
+  "candidate_world_groups": 348,
+  "source_rng_coupled_within_pairs_without_condition_key": true,
+  "development_validation_layout_seeds_disjoint": true,
+  "target_counts_consistent": true,
+  "branch_counts_consistent": true,
+  "schema_check": "JSON syntax and path semantics checked; jsonschema not installed locally",
+  "actual_new_simulation_episodes": 0
+}

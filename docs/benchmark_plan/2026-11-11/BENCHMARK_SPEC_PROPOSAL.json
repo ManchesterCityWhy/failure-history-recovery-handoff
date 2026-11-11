@@ -1,0 +1,68 @@
+{
+  "status": "proposal_not_frozen",
+  "date": "2026-11-11",
+  "new_collection_or_training_started_this_turn": false,
+  "research_question": "When does executed action-result evidence from an unsuccessful attempt improve subsequent physical recovery beyond active re-exploration?",
+  "current_artifact": {
+    "host": "mus2",
+    "root": "/scratch/zhaoguangyu/wam_scale_20261111",
+    "release": "release_v2",
+    "unique_search_failure_histories": 64,
+    "paired_scene_groups": 32,
+    "actual_main_recovery_rollouts": 384,
+    "continuous_history_guided_success_episodes": 63,
+    "ordinary_failure_bank": 185,
+    "role_in_future_study": "development_and_training_only; not fresh blind test"
+  },
+  "core_family_proposals": [
+    {"id": "F1", "name": "unsuccessful_search_and_candidate_exclusion", "priority": "control_and_basic", "caveat": "An empty probe may be normal exploration, not an abnormal mechanical failure"},
+    {"id": "F2", "name": "occluded_drop_destination_and_target_identity", "priority": "first_new_kernel"},
+    {"id": "F3", "name": "hidden_progress_and_repair_order", "priority": "second_new_kernel"},
+    {"id": "F4", "name": "action_response_and_contact_adaptation", "priority": "high_risk_after_small_sample_execution_check"}
+  ],
+  "development_target": {
+    "core": {"families": 4, "templates_per_family": 2, "scene_groups_per_template": 10, "lawful_conditions_per_group": 2, "histories": 160},
+    "controls": 40,
+    "unique_histories_total": 200,
+    "go_to_scale_requires": ["at_least_two_new_physical_recovery_mechanisms", "public_evidence_sufficiency", "reference_repair_execution", "strong_current_only_and_action_log_baselines"]
+  },
+  "paper_target": {
+    "conditional_on_mechanism_feasibility": true,
+    "core": {"families": 4, "templates_per_family": 3, "scene_groups_per_template": 50, "conditions_per_group": 2, "histories": 1200},
+    "controls": 300,
+    "unique_histories_total": 1500,
+    "splits": {
+      "train": {"core": 480, "controls": 120, "total": 600},
+      "dev": {"core": 160, "controls": 40, "total": 200},
+      "id_test": {"core": 160, "controls": 40, "total": 200},
+      "ood_template_test": {"core": 400, "controls": 100, "total": 500}
+    },
+    "natural_failure_extension_target": [150, 300],
+    "natural_extension_is_not_included_as_already_available": true
+  },
+  "source_protocol": {
+    "sample_hidden_conditions_independently_before_source_action": true,
+    "source_actor_reads_hidden_answer": false,
+    "record_all_success_failure_rejection_and_infrastructure_attempts": true,
+    "source_provenance": ["policy_native", "blind_program_or_policy_probe", "injected_fault", "expert_or_script"],
+    "failure_labels": ["event_failure", "fixed_budget_noncompletion", "safety_or_irreversible_failure"],
+    "default_public_channels": ["task", "rgb_front", "rgb_wrist", "executed_actions", "robot_proprioception", "timestamps", "shared_failure_flag"],
+    "private_only": ["hidden_physics", "object_state_truth", "source_internal_language", "future_recovery", "expert_answers", "answer_bearing_paths"],
+    "proposed_public_proprio_quantization": 0.000001,
+    "retain_unquantized_physical_records_for_replay": true,
+    "alter_object_qpos_after_recording_starts_in_main_continuous_track": false
+  },
+  "tracks": {
+    "continuous": {"primary": true, "system_resets_during_scored_recovery": 0, "robot_reset_actions_counted": true},
+    "system_reset_retry": {"primary": false, "between_attempt_reset_count": 1, "preserve_task_relevant_hidden_conditions": true},
+    "own_policy_online": {"primary": false, "retain_initial_successes_and_false_interventions": true}
+  },
+  "main_conditions": ["C0_continue_or_resample", "C1_strong_current_only", "C2_action_result_log", "C3_trained_raw_history", "C4_evidence_method", "C5_minimal_public_evidence_teacher"],
+  "current_only_retains_post_anchor_memory_and_active_exploration": true,
+  "primary_model_suggestions": {"action": ["pi05_libero", "community_lingbot_va_goal"], "upper_level": "Qwen3-VL-8B-Instruct", "freeze_action_weights_first": true},
+  "metrics": ["family_macro_original_goal_recovery_success", "full_success_budget_curve", "capped_controls_to_success", "context_valid_error_recurrence", "preserved_subgoals", "safety", "model_calls_tokens_and_latency"],
+  "primary_deadlines_and_frame_limits": "to_be_calibrated_on_development_set_and_frozen_before_test",
+  "statistics": {"cluster": "shared_source_world_or_episode_group", "minimum_inference_seeds": 3, "training_seed_repetition_separate": true},
+  "resource_reference": {"measured_main_rollouts": 384, "mean_rollout_wall_seconds_approx": 85, "sum_rollout_wall_hours": 9.08, "quantity_is_not_gpu_kernel_time": true, "main_eval_planned_runs": 25200, "working_storage_tb": [1, 2], "shared_nfs_free_at_last_audit_bytes": 0},
+  "publication_claims": {"benchmark_novelty_not_established_by_scaling_alone": true, "no_first_claim_without_further_comparison": true, "never_filter_test_by_our_methods_gain": true}
+}

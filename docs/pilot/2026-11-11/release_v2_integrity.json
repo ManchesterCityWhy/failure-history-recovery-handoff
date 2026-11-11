@@ -1,0 +1,18 @@
+{
+  "all_checks_passed": true,
+  "unique_histories": 64,
+  "recovery_anchors_checked": 128,
+  "actual_rollouts": 384,
+  "execution_aliases": 128,
+  "sha256_files_verified": 3989,
+  "successful_branch_pairs": 233,
+  "continuous_full_episodes": 63,
+  "input_reader_excludes_private_metadata_and_supervision": true,
+  "every_recovery_start_matches_exported_current_observation": true,
+  "reset_paired_rgb_identical_groups": 32,
+  "reset_raw_proprio_exact_groups": 28,
+  "reset_raw_proprio_max_abs_difference": 5.551115123125783e-17,
+  "raw_proprio_is_not_bitwise_identical_in_all_groups": true,
+  "evaluated_wam_inputs_are_rgb_and_language_only": true,
+  "proprio_check_note": "Strict equality failed for 4 groups at <=5.56e-17. RGB equality is exact. Do not claim full raw-observation equality; quantize proprio explicitly in future interfaces."
+}

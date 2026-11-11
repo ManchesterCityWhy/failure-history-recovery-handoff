@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:failure-history:episode-manifest:v0",
+  "title": "Selected failed-source episode; evaluator metadata, not a policy packet",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "episode_id", "world_group_id", "task_id", "phase", "provenance", "environment_build_id", "information_stratum", "source", "anchor", "paths", "quality", "recovery_branch_refs"],
+  "properties": {
+    "schema": {"const": "failure_history_episode_v0"},
+    "episode_id": {"$ref": "#/$defs/id"},
+    "world_group_id": {"$ref": "#/$defs/id"},
+    "task_id": {"enum": ["S1", "S2", "D1", "D2", "P1", "P2"]},
+    "phase": {"enum": ["development", "frozen_validation", "later_scale"]},
+    "provenance": {"enum": ["policy_with_injected_fault", "scripted_with_injected_fault", "blind_search_probe"]},
+    "environment_build_id": {"type": "string", "minLength": 1},
+    "information_stratum": {"enum": ["core", "V", "U"]},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actor_revision", "controls", "failure_kind", "failure_event_step", "anchor_step", "full_goal_success", "predicted_actions_are_not_executed_actions"],
+      "properties": {
+        "actor_revision": {"type": "string", "minLength": 1},
+        "controls": {"type": "integer", "minimum": 1},
+        "failure_kind": {"enum": ["proxy_search_miss", "manipulation_drop", "partial_progress_drop", "contact_disruption", "inconclusive_probe"]},
+        "failure_event_step": {"type": "integer", "minimum": 0},
+        "anchor_step": {"type": "integer", "minimum": 1},
+        "full_goal_success": {"const": false},
+        "predicted_actions_are_not_executed_actions": {"const": true}
+      }
+    },
+    "anchor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mode", "physical_resets_between_attempts", "state_sha256", "public_current_sha256", "external_pulse_ended"],
+      "properties": {
+        "mode": {"const": "continuous"},
+        "physical_resets_between_attempts": {"const": 0},
+        "state_sha256": {"$ref": "#/$defs/sha256"},
+        "public_current_sha256": {"$ref": "#/$defs/sha256"},
+        "external_pulse_ended": {"const": true}
+      }
+    },
+    "paths": {
+      "type": "object", "additionalProperties": false,
+      "required": ["public_task", "source_observations", "source_video", "current_observation", "private_scene_recipe", "private_initial_snapshot", "private_anchor_snapshot", "private_perturbations", "private_events", "private_expert_witness"],
+      "properties": {
+        "public_task": {"$ref": "#/$defs/relative_path"},
+        "source_observations": {"$ref": "#/$defs/relative_path"},
+        "source_video": {"$ref": "#/$defs/relative_path"},
+        "current_observation": {"$ref": "#/$defs/relative_path"},
+        "private_scene_recipe": {"$ref": "#/$defs/relative_path"},
+        "private_initial_snapshot": {"$ref": "#/$defs/relative_path"},
+        "private_anchor_snapshot": {"$ref": "#/$defs/relative_path"},
+        "private_perturbations": {"$ref": "#/$defs/relative_path"},
+        "private_events": {"$ref": "#/$defs/relative_path"},
+        "private_expert_witness": {"$ref": "#/$defs/relative_path"}
+      }
+    },
+    "quality": {
+      "type": "object", "additionalProperties": false,
+      "required": ["physical_valid", "source_replay_passed", "source_alignment_passed", "expert_original_goal_success", "public_evidence_audit", "selected_before_main_recovery_outcomes"],
+      "properties": {
+        "physical_valid": {"const": true},
+        "source_replay_passed": {"const": true},
+        "source_alignment_passed": {"const": true},
+        "expert_original_goal_success": {"const": true},
+        "public_evidence_audit": {"enum": ["supports_core_evidence", "current_sufficient_control", "key_condition_unknown_control"]},
+        "selected_before_main_recovery_outcomes": {"const": true}
+      }
+    },
+    "recovery_branch_refs": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/relative_path"}},
+    "annotation_version": {"type": ["string", "null"]},
+    "membership_lock_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "relative_path": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?!.*\\.\\.).+$"}
+  },
+  "$comment": "Cross-field inequalities, actual file hashes, N/N+1 alignment, observation whitelist and physical replay require the runtime verifier; this schema alone does not establish validity."
+}
